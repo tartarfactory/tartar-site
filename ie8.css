@@ -1,0 +1,27 @@
+#about_content_wrap {
+  position: relative;
+  height: 826px;
+  width: 1006px;
+  margin: 0 auto;
+}
+#about_content_wrap > #about_content {
+  margin-top: 31px;
+  width: 100%;
+  height: 1026px;
+}
+#about_content_wrap > #about_content > .profile > img {
+  float: left;
+}
+#about_content_wrap > #about_content > .profile > p {
+  float: left;
+  margin-left: -35px;
+  margin-top: 11px;
+  font-family: 'Hanna';
+  white-space: pre-wrap;
+  line-height: 170%;
+  color: #535353;
+}
+#about_content_wrap > #about_content > .profile > p > b {
+  font-size: 18px;
+  color: #323232;
+}

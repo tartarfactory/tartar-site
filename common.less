@@ -1,0 +1,126 @@
+//import
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+
+//basic
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  width: 100%;
+  font-size: 0.76em;
+}
+
+a:href, a:hover, a:link, a:active, a:visited {
+  text-decoration: none;
+  border: 0px;
+}
+
+img {
+  border: 0px;
+}
+
+//header
+#header {
+  width: 100%;
+  height: 125px;
+  box-shadow: 0px 0px 4px 2px #aaa;
+  background: url("images/header_bg.png") repeat-x;
+
+  & > #header_wrap {
+
+    position: relative;
+    width: 1006px;
+    margin: 0 auto;
+
+    & > #logo {
+      width: 100%;
+      text-align: center;
+      & > img {
+        margin-top: 32px;
+      }
+    }
+
+    & > #gnb {
+      width: 100%;
+      & > ul {
+        width: 400px;
+        list-style: none;
+        margin: 0 auto;
+        margin-top: 10px;
+        & > li {
+          float: left;
+          margin: 0px 17px 0px 17px;
+          &.first {
+             margin-left: 4px !important;
+           }
+          &.last {
+            margin-right: 0px !important;
+          }
+        }
+      }
+    }
+
+  }
+
+}
+// End #header
+
+//subpage title
+#title_wrap {
+  position: relative;
+  height: 79px;
+  width: 1006px;
+  margin: 0 auto;
+  & > #title {
+    float:left;
+    width: 100%;
+    border-bottom: 1px solid #aaa;
+    padding-bottom: 18px;
+    padding-top:26px;
+    & > #title_img {
+      float: left;
+    }
+    & > #title_location {
+      font-family: 'Hanna';
+      padding-top:30px;
+      float: right;
+      color: #d5d5d5;
+      & > span {
+        color: #606060;
+      }
+    }
+  }
+}
+
+//subpage content
+#content_wrap {
+  position: relative;
+  width: 1006px;
+  min-height: 800px;
+  margin: 0 auto;
+  padding-top: 31px;
+}
+
+//footer
+#footer {
+  width: 100%;
+  padding: 20px 0px;
+  text-align: center;
+  color: #444;
+  font-size: 14px;
+  & > b {
+    color: #ec3f35;
+  }
+  & > p {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 3px;
+  }
+}
+// End #footer
+
+.left { float:left !important; }
+.right { float:right !important; }
+.last { margin-right: 0px !important; }
