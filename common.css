@@ -33,7 +33,7 @@ img {
   width: 100%;
   text-align: center;
 }
-#header > #header_wrap > #logo > img {
+#header > #header_wrap > #logo img {
   margin-top: 32px;
 }
 #header > #header_wrap > #gnb {
@@ -83,7 +83,7 @@ img {
 #content_wrap {
   position: relative;
   width: 1006px;
-  min-height: 800px;
+  min-height: 400px;
   margin: 0 auto;
   padding-top: 31px;
 }
