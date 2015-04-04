@@ -9,6 +9,9 @@
    <![endif]-->
    <link rel="stylesheet" href="common.css" />
    <link rel="stylesheet" href="main.css" />
+   <link rel="stylesheet" href="../dist/css/gallery.css">
+   <link rel="stylesheet" href="../dist/css/jquery.flipster.css">
+   <link rel="stylesheet" href="../dist/css/flipsternavtabs.css">
 </head>
 
 <body>
@@ -38,6 +41,49 @@
    <div id="content_wrap">
       <div id="project">
          <img src="../images/project_title.png"/>
+
+         <div id="Main-Content">
+            <div class="Container">
+               <!-- Flipster List -->
+               <div class="flipster">
+                  <ul>
+                     <li>
+                        <a href="demo.html" class="Button Block">
+                           <h1>Basic Setup</h1>
+                           <p>The bare minimum code needed to implement Flipster</p>
+                        </a>
+                     </li>
+                     <li>
+                        <a href="demo2.html" class="Button Block">
+                           <h1>Basic Setup</h1>
+                           <p>The bare minimum code needed to implement Flipster</p>
+                        </a>
+                     </li>
+                     <li>
+                        <a href="demo3.html" class="Button Block">
+                           <h1>Carousel</h1>
+                           <p>Roundabout carousel style!</p>
+                        </a>
+                     </li>
+                     <li>
+                        <a href="demo4.html" class="Button Block">
+                           <h1>Coverflow with Tab Navigation</h1>
+                           <p>Example of tab navigation using the <code>enableNav</code> option</p>
+                        </a>
+                     </li>
+                     <li>
+                        <a href="demo5.html" class="Button Block">
+                           <h1>Carousel with Tab Navigation</h1>
+                           <p>Example of tab navigation using the <code>enableNav</code> option</p>
+                        </a>
+                     </li>
+                  </ul>
+               </div>
+               <!-- End Flipster List -->
+
+            </div>
+         </div>
+
       </div>
    </div>
 </div>
@@ -48,6 +94,15 @@
    </p>
 </div>
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="../dist/js/jquery.flipster.js"></script>
+<script>
+   <!--
+
+   $(function(){ $(".flipster").flipster({ style: 'carousel', start: 0 }); });
+
+   -->
+</script>
 </body>
 </html>
 <script>
