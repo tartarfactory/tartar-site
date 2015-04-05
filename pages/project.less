@@ -52,3 +52,23 @@
 .line_1 {
   height: 320px;
 }
+@media (min-width: 768px) {
+  .modal-dialog {
+    width: 1024px;
+    margin: 30px auto;
+
+  }
+  .modal-content {
+    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+    & > .modal-body {
+      & > img {
+        width : 994px;
+        height: 755px;
+      }
+    }
+  }
+  .modal-sm {
+    width: 300px;
+  }
+}
