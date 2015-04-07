@@ -7,7 +7,7 @@
 	left:0px;
 	width:100%;
 	height:100%;
-	background:transparent url(../images/greyscale_natural_grunge3.jpg) repeat bottom left;
+	background:transparent url(../gallary_images/greyscale_natural_grunge3.jpg) repeat bottom left;
 	opacity:0.3;
 	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=30);
 }
@@ -59,11 +59,7 @@ ul.fp_galleryList li:hover{
 	overflow:hidden;
 	width:100%;
 	margin:50px 0 30px 0;
-	height:0px; /*240px to show*/
-	background-color:#111;
-	-moz-box-shadow:0px 0px 10px #000 inset;
-	-webkit-box-shadow:0px 0px 10px #000 inset;
-	box-shadow:0px 0px 10px #000 inset;
+	height:400px; /*240px to show*/
 }
 #fp_thumbScroller{
 	position:relative;
@@ -85,9 +81,6 @@ ul.fp_galleryList li:hover{
 #fp_thumbScroller img{
 	border:3px solid #fff;
 	height:200px;
-	-moz-box-shadow:1px 1px 3px #000;
-	-webkit-box-shadow:1px 1px 3px #000;
-	box-shadow:1px 1px 3px #000;
 	-moz-border-radius:2px;
 	-webkit-border-radius:2px;
 	border-radius:2px;
@@ -113,7 +106,7 @@ ul.fp_galleryList li:hover{
 	top:50%;
 	left:50%;
 	margin:-35px 0px 0px -35px;
-	background:#fff url(../images/loader.gif) no-repeat center center;
+	background:#fff url(../gallary_images/loader.gif) no-repeat center center;
 	width:70px;
 	height:70px;
 	z-index:9999;
@@ -152,11 +145,11 @@ ul.fp_galleryList li:hover{
 	opacity:0.9;
 }
 .fp_next{
-	background:#fff url(../images/next.png) no-repeat center center;
+	background:#fff url(../gallary_images/next.png) no-repeat center center;
 	right:-50px; /*10 to show*/
 }
 .fp_prev{
-	background:#fff url(../images/prev.png) no-repeat center center;
+	background:#fff url(../gallary_images/prev.png) no-repeat center center;
 	left:-50px; /*10 to show*/
 }
 .fp_close{
@@ -169,7 +162,7 @@ ul.fp_galleryList li:hover{
 	top:10px;
 	right:10px;
 	margin-top:0px;
-	background:#fff url(../images/close.png) no-repeat 10px 50%;
+	background:#fff url(../gallary_images/close.png) no-repeat 10px 50%;
 	color:#000;
 }
 .fp_scrollWrapper{
@@ -179,13 +172,14 @@ ul.fp_galleryList li:hover{
 	height:12px;
 	position:relative;
 	margin:30px auto;
-	background:#111;
+	background: #15061f;
 	-moz-border-radius:10px;
 	-webkit-border-radius:10px;
 	border-radius:10px;
 }
 .ui-widget-content{
 	height:12px;
+	background-color:#353535;
 	background-color:#353535;
 	position:relative;
 	-moz-border-radius:10px;
