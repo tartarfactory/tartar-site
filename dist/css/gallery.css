@@ -36,7 +36,6 @@
 }
 /* @group Basics */
 body {
-  color: #333333;
   font-weight: 400;
   font-size: 15px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -45,7 +44,6 @@ body {
 /* @end */
 /* @group Typography */
 a {
-  color: #da0d25;
   text-decoration: none;
 }
 a:hover,

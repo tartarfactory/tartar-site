@@ -74,7 +74,7 @@
 					var padding_l	= 0;
 					var padding_r	= 0;
 					//center of screen
-					var center		= $(window).width()/2;
+					var center		= -1;
 					var one_divs_w  = 0;
 					/*
 					Note:
@@ -258,12 +258,40 @@
 						//for the large image based on the windows size.
 						//those values are saved on the element using the jQuery.data()
 						getFinalValues($large_img);
+						var getTop = function() {
+							var myTop = 0;
+							if (typeof(window.pageYOffset) == 'number') {   //WebKit
+								myTop = window.pageYOffset;
+							} else if (typeof(document.documentElement.scrollTop) == 'number') {
+								myTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
+							}
+							return myTop;
+						}
+						var getSize = function() {
+							var myWidth = 0, myHeight = 0;
+							if( typeof( window.innerWidth ) == 'number' ) {
+								//Non-IE
+								myWidth = window.innerWidth;
+								myHeight = window.innerHeight;
+							} else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+								//IE 6+ in 'standards compliant mode'
+								myWidth = document.documentElement.clientWidth;
+								myHeight = document.documentElement.clientHeight;
+							} else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+								//IE 4 compatible
+								myWidth = document.body.clientWidth;
+								myHeight = document.body.clientHeight;
+							}
+							return [myWidth, myHeight];
+						}
+
 						var largeW 	= $large_img.data('width');
 						var largeH 	= $large_img.data('height');
 						//windows width, height and scroll
 						var $window = $(window);
 						var windowW = $window.width();
-						var windowH = $window.height();
+						var windowH = getSize()[1];
+						console.log(windowH);
 						var windowS = $window.scrollTop();
 						//hide the image loading
 						$fp_loading.hide();
@@ -271,7 +299,7 @@
 						$fp_overlay.show();
 						//now animate the large image
 						$large_img.stop().animate({
-							'top'		: windowH/2 -largeH/2 + windowS + 'px',
+							'top'		: windowH/2 -largeH/2 + 'px',
 							'left'		: windowW/2 -largeW/2 + 'px',
 							'width'		: largeW + 'px',
 							'height'	: largeH + 'px',
