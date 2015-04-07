@@ -89,7 +89,7 @@ img {
 }
 #footer {
   width: 100%;
-  padding: 20px 0px;
+  padding: 50px 0px;
   text-align: center;
   color: #444;
   font-size: 14px;
@@ -110,4 +110,7 @@ img {
 }
 .last {
   margin-right: 0px !important;
+}
+.text-center {
+  text-align: center !important;
 }

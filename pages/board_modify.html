@@ -4,7 +4,8 @@
    <meta charset="utf-8"/>
    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
    <link rel="stylesheet" href="../common.css" />
-   <link rel="stylesheet" href="board.css"/>
+   <link rel="stylesheet" href="board_write.css"/>
+   <script src="../smarteditor/js/HuskyEZCreator.js"></script>
    <!--[if lt IE 9]>
    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -38,27 +39,37 @@
          <img src ="../images/board/board.png">
       </div>
       <div id="title_location">
-         Home > <span>Board</span>
+         Home > Board > <span>Write</span>
       </div>
    </div>
 </div>
 <div id="content_wrap">
    <div id="board_content">
-      <table cellpadding="0" cellspacing="0" class="board">
+      <table cellpadding="0" cellspacing="0" class="write_frm">
          <tr>
-            <th>번호</th>
             <th>제목</th>
-            <th>작성자</th>
-            <th>날짜</th>
+            <td colspan="3"><input type="text" id="subject" name="subject" class="subject" /></td>
          </tr>
          <tr>
-            <td>1</td>
-            <td class="subject"><a href="board_view.html">안녕하세요 타르타르 팩토리 입니다.</a></td>
-            <td>관리자</td>
-            <td>2015.04.05</td>
+            <td colspan="4">
+               <textarea name="ir1" id="ir1" rows="10" cols="127"></textarea>
+            </td>
+         </tr>
+         <tr>
+            <th>이름</th>
+            <td><input type="text" id="name" name="subject" /></td>
+            <th>비밀번호</th>
+            <td><input type="text" id="password" name="subject" /></td>
+         </tr>
+         <tr>
+            <td colspan="4" class="text-center">
+               <button class="write_btn">수정</button>
+               <button class="list_btn" onclick="boardListBtn()">목록</button>
+            </td>
          </tr>
       </table>
-      <button class="write_btn right" onclick="boardWriteBtn()">글쓰기</button>
+
+
    </div>
 </div>
 <div id="footer">
@@ -70,10 +81,16 @@
 
 </body>
 </html>
-<script>
+<script type="text/javascript">
+   var oEditors = [];
+   nhn.husky.EZCreator.createInIFrame({
+      oAppRef: oEditors,
+      elPlaceHolder: "ir1",
+      sSkinURI: "../smarteditor/SmartEditor2Skin.html",
+      fCreator: "createSEditor2"
+   });
 
-   function boardWriteBtn(){
-      location.href = 'board_write.html'
+   function boardListBtn(){
+      location.href = "board.html"
    }
-
 </script>
