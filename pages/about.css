@@ -1,1 +1,20 @@
-#about_content{width:100%;min-height:1026px}#about_content>.profile>img{float:left}#about_content>.profile>p{float:left;margin-left:-35px;margin-top:-6px;font-family:Hanna;white-space:pre-wrap;line-height:170%;color:#535353}#about_content>.profile>p>b{font-size:18px;color:#323232}
+#about_content {
+  width: 100%;
+  min-height: 1026px;
+}
+#about_content > .profile > img {
+  float: left;
+}
+#about_content > .profile > p {
+  float: left;
+  margin-left: -35px;
+  margin-top: -6px;
+  font-family: 'Hanna';
+  white-space: pre-wrap;
+  line-height: 170%;
+  color: #535353;
+}
+#about_content > .profile > p > b {
+  font-size: 18px;
+  color: #323232;
+}
