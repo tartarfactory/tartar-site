@@ -1,1 +1,69 @@
-#contact_wrap{width:1006px;min-height:1026px;margin:0 auto}#contact_wrap>#contact{width:100%;padding-top:48px}#contact_wrap>#contact>#contact_message{float:left;width:246px;height:319px}#contact_wrap>#contact>#contact_post{float:right;width:760px;height:319px}#contact_wrap>#contact>#contact_post>#post_message{float:right;margin-right:4px;margin-top:19px}#contact_wrap>#contact>#contact_post>#post_info>.contact_text{border-top:0;border-left:0;border-right:0;border-bottom:1px;border-bottom-color:#EAEAEA;box-shadow:0 1px 0 0 #EAEAEA;padding-bottom:6px;width:304px;margin-left:55px}#contact_wrap>#contact>#contact_post>#post_content{margin-left:55px;margin-top:41px}#contact_wrap>#contact>#contact_post>#post_content>#message_content{width:660px;height:128px;border-top:0;border-left:0;border-right:0;border-bottom:1px;box-shadow:0 1px 0 0 #EAEAEA;border-bottom-color:#EAEAEA}#contact_name{background:url(../images/contact/name.png) no-repeat}#contact_email{background:url(../images/contact/email.png) no-repeat}#message_content{background:url(../images/contact/message.png) no-repeat}
+#contact_wrap {
+  width: 1006px;
+  min-height: 1026px;
+  margin: 0 auto;
+}
+#contact_wrap > #contact {
+  width: 100%;
+  padding-top: 48px;
+}
+#contact_wrap > #contact > #contact_message {
+  float: left;
+  width: 246px;
+  height: 319px;
+}
+#contact_wrap > #contact > #contact_message span {
+  color: #ec3f35;
+}
+#contact_wrap > #contact > #contact_message h3 {
+  color: #bbb;
+}
+#contact_wrap > #contact > #contact_message .contact_intro {
+  margin-top: 15px;
+  font-size: 12px;
+  line-height: 18px;
+}
+#contact_wrap > #contact > #contact_post {
+  float: right;
+  width: 760px;
+  height: 319px;
+}
+#contact_wrap > #contact > #contact_post > #post_message {
+  float: right;
+  margin-right: 4px;
+  margin-top: 19px;
+}
+#contact_wrap > #contact > #contact_post > #post_info > .contact_text {
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+  border-bottom: 1px;
+  border-bottom-color: #EAEAEA;
+  box-shadow: 0px 1px 0px 0px #EAEAEA;
+  padding-bottom: 6px;
+  width: 304px;
+  margin-left: 55px;
+}
+#contact_wrap > #contact > #contact_post > #post_content {
+  margin-left: 55px;
+  margin-top: 41px;
+}
+#contact_wrap > #contact > #contact_post > #post_content > #message_content {
+  width: 660px;
+  height: 128px;
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+  border-bottom: 1px;
+  box-shadow: 0px 1px 0px 0px #EAEAEA;
+  border-bottom-color: #EAEAEA;
+}
+#contact_name {
+  background: url(../images/contact/name.png) no-repeat;
+}
+#contact_email {
+  background: url(../images/contact/email.png) no-repeat;
+}
+#message_content {
+  background: url(../images/contact/message.png) no-repeat;
+}
