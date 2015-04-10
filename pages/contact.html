@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
     <link rel="stylesheet" href="../common.css" />
     <link rel="stylesheet" href="contact.css"/>
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -64,7 +65,7 @@
                 <textarea id="message_content" aria-multiline="true" oninput="messageOnFoucs()"></textarea>
             </div>
             <div id="post_message">
-                <img src="../images/contact/send.png">
+                <img src="../images/contact/send.png" onclick="sendMessage()">
             </div>
         </div>
     </div>
@@ -79,6 +80,22 @@
 </html>
 
 <script>
+
+    function sendMessage() {
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            data: {
+                "name":$("#contact_name").val(),
+                "email":$("#contact_email").val(),
+                "content":$("#message_content").val()
+            },
+            url: "http://localhost:8000/emails",
+            success: function (data) {
+                alert('메일이 성공적으로 발송되었습니다.');
+            }
+        })
+    }
 
     function nameOnFocus() {
         var textBox = document.getElementById("contact_name");
