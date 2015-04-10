@@ -6,6 +6,7 @@
    <link rel="stylesheet" href="../common.css" />
    <link rel="stylesheet" href="board_write.css"/>
    <script src="../smarteditor/js/HuskyEZCreator.js"></script>
+   <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
    <!--[if lt IE 9]>
    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -52,18 +53,18 @@
          </tr>
          <tr>
             <td colspan="4">
-               <textarea name="ir1" id="ir1" rows="10" cols="127"></textarea>
+               <textarea name="content" id="content" rows="10" cols="127"></textarea>
             </td>
          </tr>
          <tr>
             <th>이름</th>
             <td><input type="text" id="name" name="subject" /></td>
             <th>비밀번호</th>
-            <td><input type="text" id="password" name="subject" /></td>
+            <td><input type="password" id="password" name="subject" /></td>
          </tr>
          <tr>
             <td colspan="4" class="text-center">
-               <button class="write_btn">수정</button>
+               <button class="write_btn" onclick="modifyDocument()">수정</button>
                <button class="list_btn" onclick="boardListBtn()">목록</button>
             </td>
          </tr>
@@ -82,14 +83,68 @@
 </body>
 </html>
 <script type="text/javascript">
+   function getParams() {
+      var QueryString = function () {
+         var query_string = {};
+         var query = window.location.search.substring(1);
+         var vars = query.split("&");
+         for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            // If first entry with this name
+            if (typeof query_string[pair[0]] === "undefined") {
+               query_string[pair[0]] = pair[1];
+               // If second entry with this name
+            } else if (typeof query_string[pair[0]] === "string") {
+               var arr = [ query_string[pair[0]], pair[1] ];
+               query_string[pair[0]] = arr;
+               // If third or later entry with this name
+            } else {
+               query_string[pair[0]].push(pair[1]);
+            }
+         }
+         return query_string;
+      } ();
+      return QueryString;
+   }
+
+   window.onload = function() {
+      $.ajax({
+         type: "GET",
+         dataType: "json",
+         url: "http://localhost:8000/documents/"+getParams()['id'],
+         success: function (data) {
+            document.getElementById("subject").value = (data[0]['subject']);
+            document.getElementById("name").value = (data[0]['name']);
+            document.getElementById("content").value = (data[0]['content']);
+         }
+      })
+   }
+
    var oEditors = [];
    nhn.husky.EZCreator.createInIFrame({
       oAppRef: oEditors,
-      elPlaceHolder: "ir1",
+      elPlaceHolder: "content",
       sSkinURI: "../smarteditor/SmartEditor2Skin.html",
       fCreator: "createSEditor2"
    });
 
+   function modifyDocument() {
+      $.ajax({
+         type: "PUT",
+         dataType: "json",
+         data: {
+            "subject" : $("#subject").val(),
+            "name": $("#name").val(),
+            "content":$("#content").val(),
+            "password":$("#password").val()
+         },
+         url: "http://localhost:8000/documents/"+getParams()['id'],
+         success: function (data) {
+            alert('수정되었습니다.');
+            location.href="board.html";
+         }
+      })
+   }
    function boardListBtn(){
       location.href = "board.html"
    }
