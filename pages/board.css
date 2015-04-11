@@ -1,5 +1,6 @@
 #board_content {
   width: 100%;
+  min-height: 500px;
 }
 #board_content .board {
   width: 100%;

@@ -5,6 +5,7 @@
    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
    <link rel="stylesheet" href="../common.css" />
    <link rel="stylesheet" href="board_view.css"/>
+   <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
    <!--[if lt IE 9]>
    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -47,14 +48,14 @@
       <table cellpadding="0" cellspacing="0" class="write_frm">
          <tr>
             <th>제목</th>
-            <td>제목입니다</td>
+            <td id="view_subject"></td>
             <th>이름</th>
-            <td>혁종스트</td>
+            <td id="view_name"></td>
          </tr>
          <tr>
             <td colspan="4" class="content">
-               <p>
-                  내용부
+               <p id="view_content">
+
                </p>
             </td>
          </tr>
@@ -77,10 +78,51 @@
 </body>
 </html>
 <script>
+
+   window.onload = function() {
+
+
+      $.ajax({
+         type: "GET",
+         dataType: "json",
+         url: "http://localhost:8000/documents/"+getParams()['id'],
+         success: function (data) {
+            $("#view_subject").append(data[0]['subject']);
+            $("#view_name").append(data[0]['name']);
+            $("#view_content").append(data[0]['content']);
+         }
+      })
+   }
+
+   function getParams() {
+      var QueryString = function () {
+         var query_string = {};
+         var query = window.location.search.substring(1);
+         var vars = query.split("&");
+         for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            // If first entry with this name
+            if (typeof query_string[pair[0]] === "undefined") {
+               query_string[pair[0]] = pair[1];
+               // If second entry with this name
+            } else if (typeof query_string[pair[0]] === "string") {
+               var arr = [ query_string[pair[0]], pair[1] ];
+               query_string[pair[0]] = arr;
+               // If third or later entry with this name
+            } else {
+               query_string[pair[0]].push(pair[1]);
+            }
+         }
+         return query_string;
+      } ();
+      return QueryString;
+   }
+
    function boardListBtn(){
       location.href = "board.html"
    }
    function modifyBtn(){
-      location.href = "board_password.html"
+
+      location.href = "board_password.html?id="+getParams()['id'];
    }
 </script>
