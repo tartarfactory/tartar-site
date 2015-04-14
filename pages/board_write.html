@@ -1,79 +1,79 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-    <link rel="stylesheet" href="../common.css"/>
-    <link rel="stylesheet" href="board_write.css"/>
-    <script src="../smarteditor/js/HuskyEZCreator.js"></script>
-    <script src="../dist/js/common.js"></script>
-    <script type="text/javascript" src="../dist/js/jquery-1.4.2.min.js"></script>
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+   <meta charset="utf-8"/>
+   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+   <link rel="stylesheet" href="../common.css"/>
+   <link rel="stylesheet" href="board_write.css"/>
+   <script src="../smarteditor/js/HuskyEZCreator.js"></script>
+   <script src="../dist/js/common.js"></script>
+   <script type="text/javascript" src="../dist/js/jquery-1.4.2.min.js"></script>
+   <!--[if lt IE 9]>
+   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+   <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 
-    <link rel="stylesheet" href="../ie8.css"/>
-    <![endif]-->
+   <link rel="stylesheet" href="../ie8.css"/>
+   <![endif]-->
 </head>
 
 <body>
 
 <div id="header">
-    <div id="header_wrap">
-        <div id="logo">
-            <a href="main.html"><img src="../images/logo.png" alt="HOME"/></a>
-        </div>
-        <div id="gnb">
-            <ul>
-                <li class="first"><a href="about.html"><img src="../images/gnb/about.png"/></a></li>
-                <li><img src="../images/gnb/line.png"/></li>
-                <li><a href="project.html"><img src="../images/gnb/project.png"/></a></li>
-                <li><img src="../images/gnb/line.png"/></li>
-                <li><a href="board.html"><img src="../images/gnb/board.png"/></a></li>
-                <li><img src="../images/gnb/line.png"/></li>
-                <li class="last"><a href="contact.html"><img src="../images/gnb/contact.png"/></a></li>
-            </ul>
-        </div>
-    </div>
+   <div id="header_wrap">
+      <div id="logo">
+         <a href="main.html"><img src="../images/logo.png" alt="HOME"/></a>
+      </div>
+      <div id="gnb">
+         <ul>
+            <li class="first"><a href="about.html"><img src="../images/gnb/about.png"/></a></li>
+            <li><img src="../images/gnb/line.png"/></li>
+            <li><a href="project.html"><img src="../images/gnb/project.png"/></a></li>
+            <li><img src="../images/gnb/line.png"/></li>
+            <li><a href="board.html"><img src="../images/gnb/board.png"/></a></li>
+            <li><img src="../images/gnb/line.png"/></li>
+            <li class="last"><a href="contact.html"><img src="../images/gnb/contact.png"/></a></li>
+         </ul>
+      </div>
+   </div>
 </div>
 <div id="title_wrap">
-    <div id="title">
-        <div id="title_img">
-            <img src="../images/board/board.png">
-        </div>
-        <div id="title_location">
-            Home > Board > <span>Write</span>
-        </div>
-    </div>
+   <div id="title">
+      <div id="title_img">
+         <img src="../images/board/board.png">
+      </div>
+      <div id="title_location">
+         Home > Board > <span>Write</span>
+      </div>
+   </div>
 </div>
 <div id="content_wrap">
-    <div id="board_content">
-        <table cellpadding="0" cellspacing="0" class="write_frm">
+   <div id="board_content">
+      <form id="boardWriteFrm" name="boardWriteFrm" action="/documents" method="POST">
+         <table cellpadding="0" cellspacing="0" class="write_frm">
             <tr>
-                <th>제목</th>
-                <td colspan="3"><input type="text" id="subject" name="subject" class="subject"/></td>
+               <th>제목</th>
+               <td colspan="3"><input type="text" id="subject" name="subject" class="subject_input"/></td>
             </tr>
             <tr>
-                <td colspan="4">
-                    <textarea name="content" id="content" rows="10" cols="127"></textarea>
-                </td>
+               <td colspan="4">
+                  <textarea name="content" id="content" rows="10" cols="127"></textarea>
+               </td>
             </tr>
             <tr>
-                <th>이름</th>
-                <td><input type="text" id="name" name="subject"/></td>
-                <th>비밀번호</th>
-                <td><input type="password" id="password" name="subject"/></td>
+               <th>이름</th>
+               <td><input type="text" id="name" name="name"/></td>
+               <th>비밀번호</th>
+               <td><input type="password" id="password" name="password"/></td>
             </tr>
             <tr>
-                <td colspan="4" class="text-center">
-                    <button class="write_btn" onclick="writeDocument()">글쓰기</button>
-                    <button class="list_btn" onclick="boardListBtn()">목록</button>
-                </td>
+               <td colspan="4" class="text-center">
+                  <button class="write_btn">글쓰기</button>
+                  <button type="button" class="list_btn" onclick="boardListBtn()">목록</button>
+               </td>
             </tr>
-        </table>
-
-
-    </div>
+         </table>
+      </form>
+   </div>
 </div>
 <div id="footer">
    Copyright ⓒ <b>TARTAR-FACTORY</b> All right reserved.<br/>
@@ -85,42 +85,56 @@
 </body>
 </html>
 <script type="text/javascript">
+   var oEditors = [];
+   nhn.husky.EZCreator.createInIFrame({
+      oAppRef: oEditors,
+      elPlaceHolder: "content",
+      sSkinURI: "../smarteditor/SmartEditor2Skin.html",
+      fCreator: "createSEditor2"
+   });
+   $("#boardWriteFrm").submit(function(e)
+   {
+      var valueChk = frmChkValue(this);
+      window.oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []); //textarea.value Update.
 
-   console.log(__TARTAR_HOST__);
+      if(!valueChk){
+         return false;
+      } else {
+         //URL, Data
+         var formURL = __TARTAR_HOST__ + $(this).attr("action");
 
-    var oEditors = [];
-    nhn.husky.EZCreator.createInIFrame({
-        oAppRef: oEditors,
-        elPlaceHolder: "content",
-        sSkinURI: "../smarteditor/SmartEditor2Skin.html",
-        fCreator: "createSEditor2"
-    });
-
-    function boardListBtn() {
-        location.href = "board.html"
-    }
-
-
-    function writeDocument() {
-        this.oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []); //textarea.value Update.
-        var subject = document.getElementById('subject').value;
-        var content = document.getElementById('content').value;
-        var name = document.getElementById('name').value;
-        var password = document.getElementById('password').value;
-        $.ajax({
+         var postData = {
+            "subject":$("#subject").val(),
+            "content":$("#content").val(),
+            "name":$("#name").val(),
+            "password":$("#password").val()
+         };
+         alert(formURL);
+         //Send data
+         $.ajax({
             type: "POST",
             dataType: "json",
-            data: {
-                subject : subject,
-                content : content,
-                name : name,
-                password : password
-            },
-            url: "http://localhost:8000/documents",
+            data: postData,
+            url: formURL,
             success: function (data) {
-                boardListBtn();
+               boardListBtn();
+            },
+            error: function(jqXHR, textStatus, errorThrown)
+            {
+               alert(errorThrown);
             }
-        })
-    }
+         });
+      }
+
+      //STOP default action
+      e.preventDefault();
+   });
+
+
+
+   function boardListBtn() {
+      location.href = "board.html"
+   }
+
 
 </script>

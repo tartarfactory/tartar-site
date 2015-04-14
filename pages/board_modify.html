@@ -3,7 +3,7 @@
 <head>
    <meta charset="utf-8"/>
    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-   <link rel="stylesheet" href="../common.css" />
+   <link rel="stylesheet" href="../common.css"/>
    <link rel="stylesheet" href="board_write.css"/>
    <script src="../smarteditor/js/HuskyEZCreator.js"></script>
    <script src="../dist/js/common.js"></script>
@@ -11,6 +11,7 @@
    <!--[if lt IE 9]>
    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
    <link rel="stylesheet" href="../ie8.css"/>
    <![endif]-->
 </head>
@@ -38,7 +39,7 @@
 <div id="title_wrap">
    <div id="title">
       <div id="title_img">
-         <img src ="../images/board/board.png">
+         <img src="../images/board/board.png">
       </div>
       <div id="title_location">
          Home > Board > <span>Write</span>
@@ -47,31 +48,31 @@
 </div>
 <div id="content_wrap">
    <div id="board_content">
-      <table cellpadding="0" cellspacing="0" class="write_frm">
-         <tr>
-            <th>제목</th>
-            <td colspan="3"><input type="text" id="subject" name="subject" class="subject" /></td>
-         </tr>
-         <tr>
-            <td colspan="4">
-               <textarea name="content" id="content" rows="10" cols="127"></textarea>
-            </td>
-         </tr>
-         <tr>
-            <th>이름</th>
-            <td><input type="text" id="name" name="subject" /></td>
-            <th>비밀번호</th>
-            <td><input type="password" id="password" name="subject" /></td>
-         </tr>
-         <tr>
-            <td colspan="4" class="text-center">
-               <button class="write_btn" onclick="modifyDocument()">수정</button>
-               <button class="list_btn" onclick="boardListBtn()">목록</button>
-            </td>
-         </tr>
-      </table>
-
-
+      <form id="boardWriteFrm" name="boardWriteFrm" action="/documents" method="POST">
+         <table cellpadding="0" cellspacing="0" class="write_frm">
+            <tr>
+               <th>제목</th>
+               <td colspan="3"><input type="text" id="subject" name="subject" class="subject_input"/></td>
+            </tr>
+            <tr>
+               <td colspan="4">
+                  <textarea name="content" id="content" rows="10" cols="127"></textarea>
+               </td>
+            </tr>
+            <tr>
+               <th>이름</th>
+               <td><input type="text" id="name" name="name"/></td>
+               <th>비밀번호</th>
+               <td><input type="password" id="password" name="password"/></td>
+            </tr>
+            <tr>
+               <td colspan="4" class="text-center">
+                  <button class="write_btn">수정하기</button>
+                  <button type="button" class="list_btn" onclick="boardListBtn()">목록</button>
+               </td>
+            </tr>
+         </table>
+      </form>
    </div>
 </div>
 <div id="footer">
@@ -112,14 +113,14 @@
       $.ajax({
          type: "GET",
          dataType: "json",
-         url: "http://localhost:8000/documents/"+getParams()['id'],
+         url: __TARTAR_HOST__ + "/documents/" + getParams()['id'],
          success: function (data) {
             document.getElementById("subject").value = (data[0]['subject']);
             document.getElementById("name").value = (data[0]['name']);
             document.getElementById("content").value = (data[0]['content']);
          }
       })
-   }
+   };
 
    var oEditors = [];
    nhn.husky.EZCreator.createInIFrame({
@@ -129,23 +130,44 @@
       fCreator: "createSEditor2"
    });
 
-   function modifyDocument() {
-      $.ajax({
-         type: "PUT",
-         dataType: "json",
-         data: {
-            "subject" : $("#subject").val(),
-            "name": $("#name").val(),
+   $("#boardWriteFrm").submit(function(e)
+   {
+      var valueChk = frmChkValue(this);
+      window.oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []); //textarea.value Update.
+
+      if(!valueChk){
+         return false;
+      } else {
+         //URL, Data
+         var formURL = __TARTAR_HOST__ + $(this).attr("action");
+
+         var postData = {
+            "subject":$("#subject").val(),
             "content":$("#content").val(),
-            "password":$("#password").val()
-         },
-         url: "http://localhost:8000/documents/"+getParams()['id'],
-         success: function (data) {
-            alert('수정되었습니다.');
-            location.href="board.html";
-         }
-      })
-   }
+            "name":$("#name").val()
+         };
+         alert(formURL);
+         //Send data
+         $.ajax({
+            type: "PUT",
+            dataType: "json",
+            data: postData,
+            url: formURL,
+            success: function (data) {
+               alert('수정되었습니다.');
+               boardListBtn();
+            },
+            error: function(jqXHR, textStatus, errorThrown)
+            {
+               alert(errorThrown);
+            }
+         });
+      }
+
+      //STOP default action
+      e.preventDefault();
+   });
+
    function boardListBtn(){
       location.href = "board.html"
    }

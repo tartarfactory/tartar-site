@@ -63,6 +63,7 @@
          <tr>
             <td colspan="4" class="text-center">
                <button class="write_btn" onclick="modifyBtn()">수정</button>
+               <button class="list_btn" onclick="boardDeleteBtn()">삭제</button>
                <button class="list_btn" onclick="boardListBtn()">목록</button>
             </td>
          </tr>
@@ -86,7 +87,7 @@
       $.ajax({
          type: "GET",
          dataType: "json",
-         url: "http://localhost:8000/documents/"+getParams()['id'],
+         url: __TARTAR_HOST__ + "/documents/"+getParams()['id'],
          success: function (data) {
             $("#view_subject").append(data[0]['subject']);
             $("#view_name").append(data[0]['name']);
@@ -120,10 +121,13 @@
    }
 
    function boardListBtn(){
-      location.href = "board.html"
+      location.href = "board.html";
+   }
+   function boardDeleteBtn(){
+      location.href = "board_password.html?id="+getParams()['id'];
    }
    function modifyBtn(){
 
-      location.href = "board_password.html?id="+getParams()['id'];
+      location.href = "board_modify.html?id="+getParams()['id'];
    }
 </script>

@@ -48,10 +48,10 @@
     <div id="board_content">
         <table cellpadding="0" cellspacing="0" class="board" id="board">
             <tr>
-                <th>번호</th>
+                <th width="60">번호</th>
                 <th>제목</th>
-                <th>작성자</th>
-                <th>날짜</th>
+                <th width="120">작성자</th>
+                <th width="80">날짜</th>
             </tr>
         </table>
         <button class="write_btn right" onclick="boardWriteBtn()">글쓰기</button>
@@ -68,18 +68,22 @@
 </html>
 <script>
     window.onload = function () {
+       var formURL = __TARTAR_HOST__ + "/documents";
         $.ajax({
             type: "GET",
             dataType: "json",
-            url: "http://localhost:8000/documents",
+            url: formURL,
             success: function (data) {
                 for(i=0;i<data.length;i++) {
                     var url = "board_view.html?id="+data[i]['id'];
-                     $("#board").append("<tr><td>" + data[i]['no'] + "<td><a href="+url+">" + data[i]['subject'] + "</a></td>" + "<td>" + data[i]['name'] + "</td>" + "<td>" + data[i]['created_at'] + "</td>" + "</td></tr>")
+                     $("#board").append("<tr><td>" + data[i]['no'] + "<td><a href="+url+">" + data[i]['subject'] +
+                     "</a></td>" + "<td>" + data[i]['name'] + "</td>" + "<td>" + data[i]['created_at'].split(" ")[0] +
+                     "</td>" +
+                     "</td></tr>")
                 }
             }
         })
-    }
+    };
     function boardWriteBtn() {
         location.href = 'board_write.html'
     }

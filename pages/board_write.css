@@ -27,7 +27,7 @@
   border-bottom: 1px solid #ec3f35;
   outline: none;
 }
-#board_content .write_frm .subject {
+#board_content .write_frm .subject_input {
   min-width: 617px !important;
 }
 #board_content .write_btn {
