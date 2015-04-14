@@ -1,1 +1,2 @@
-var __TARTAR_HOST__ = "http://localhost/"
+var __TARTAR_HOST__ = "http://localhost:8080";
+

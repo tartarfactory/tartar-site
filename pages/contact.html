@@ -56,7 +56,7 @@
             </p>
         </div>
         <div id="contact_post">
-           <form>
+           <form name="ajaxform" id="ajaxform" action="/emails" method="POST">
             <div id="post_info">
                 <input type="text" id="contact_name" class="contact_text" oninput="nameOnFocus()" >
                 <input type="text" id="contact_email" class="contact_text" oninput="emailOnFocus()">
@@ -65,7 +65,7 @@
                 <textarea id="message_content" aria-multiline="true" oninput="messageOnFoucs()"></textarea>
             </div>
             <div id="post_message">
-                <img src="../images/contact/send.png" onclick="sendMessage()">
+                <input type="image" src="../images/contact/send.png">
             </div>
            </form>
         </div>
@@ -82,40 +82,54 @@
 
 <script>
 
-    function sendMessage() {
-        $.ajax({
-            type: "POST",
-            dataType: "json",
-            data: {
-                "name":$("#contact_name").val(),
-                "email":$("#contact_email").val(),
-                "content":$("#message_content").val()
-            },
-            url: "http://localhost:8000/emails",
-            success: function (data) {
-                alert('메일이 성공적으로 발송되었습니다.');
-            }
-        })
-    }
+   $("#ajaxform").submit(function(e)
+   {
+      //URL, Data
+      var formURL = __TARTAR_HOST__ + $(this).attr("action");
+      var postData = {
+         "name":$("#contact_name").val(),
+         "email":$("#contact_email").val(),
+         "content":$("#message_content").val()
+      };
 
-    function nameOnFocus() {
-        var textBox = document.getElementById("contact_name");
-        textBox.style.background = "none";
-        if(textBox.value == '')
-            textBox.style.background = "url(../images/contact/name.png) no-repeat";
-    }
+      //Send data
+      $.ajax({
+         type: "POST",
+         dataType: "json",
+         data: postData,
+         url: formURL,
+         success: function (data) {
+            alert('메일이 성공적으로 발송되었습니다.');
+         },
+         error: function(jqXHR, textStatus, errorThrown)
+         {
+            alert(errorThrown);
+         }
+      });
 
-    function emailOnFocus() {
-        var textBox = document.getElementById("contact_email");
-        textBox.style.background = "none";
-        if(textBox.value == '')
-            textBox.style.background = "url(../images/contact/email.png) no-repeat";
-    }
+      //STOP default action
+      e.preventDefault();
+   });
 
-    function messageOnFoucs() {
-        var textBox = document.getElementById("message_content");
-        textBox.style.background = "none";
-        if(textBox.value == '')
-            textBox.style.background = "url(../images/contact/message.png) no-repeat";
-    }
+   function nameOnFocus() {
+      var textBox = document.getElementById("contact_name");
+      textBox.style.background = "none";
+      if(textBox.value == '')
+         textBox.style.background = "url(../images/contact/name.png) no-repeat";
+   }
+
+   function emailOnFocus() {
+      var textBox = document.getElementById("contact_email");
+      textBox.style.background = "none";
+      if(textBox.value == '')
+         textBox.style.background = "url(../images/contact/email.png) no-repeat";
+   }
+
+   function messageOnFoucs() {
+      var textBox = document.getElementById("message_content");
+      textBox.style.background = "none";
+      if(textBox.value == '')
+         textBox.style.background = "url(../images/contact/message.png) no-repeat";
+   }
+
 </script>
