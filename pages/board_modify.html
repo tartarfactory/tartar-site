@@ -129,14 +129,14 @@
    });
 
    function modifyDocument() {
+      this.oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []); //textarea.value Update.
       $.ajax({
          type: "PUT",
          dataType: "json",
          data: {
             "subject" : $("#subject").val(),
             "name": $("#name").val(),
-            "content":$("#content").val(),
-            "password":$("#password").val()
+            "content":$("#content").val()
          },
          url: "http://localhost:8000/documents/"+getParams()['id'],
          success: function (data) {
