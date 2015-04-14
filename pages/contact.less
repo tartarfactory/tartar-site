@@ -1,6 +1,6 @@
 #contact_wrap {
   width: 1006px;
-  min-height: 1026px;
+  min-height: 500px;
   margin: 0 auto;
   & > #contact {
     width: 100%;
@@ -9,19 +9,40 @@
       float: left;
       width: 246px;
       height: 319px;
+      & span {
+        color: #ec3f35;
+      }
+      & h3 {
+        color: #bbb;
+      }
+      & .contact_intro {
+       margin-top: 15px;
+       font-size: 12px;
+       line-height: 18px;
+      }
     }
-    & > #contact_post {
+    & #contact_post {
       float: right;
       width: 760px;
       height: 319px;
 
-      & > #post_message {
+      & input:focus {
+        outline: none;
+      }
+      & textarea:focus {
+        outline: none;
+      }
+
+      & #post_message {
         float: right;
         margin-right: 4px;
         margin-top: 19px;
+        & > img {
+          cursor: pointer;
+        }
       }
-      & > #post_info {
-        & > .contact_text {
+      & #post_info {
+        & .contact_text {
           border-top: 0px;
           border-left: 0px;
           border-right: 0px;
@@ -34,10 +55,10 @@
         }
       }
 
-      & > #post_content {
+      & #post_content {
         margin-left: 55px;
         margin-top: 41px;
-        & > #message_content {
+        & #message_content {
           width: 660px;
           height: 128px;
           border-top: 0px;

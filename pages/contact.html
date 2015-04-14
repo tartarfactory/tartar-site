@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
     <link rel="stylesheet" href="../common.css" />
     <link rel="stylesheet" href="contact.css"/>
-    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
+    <script src="../dist/js/common.js"></script>
+    <script type="text/javascript" src="../dist/js/jquery-1.4.2.min.js"></script>
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -46,17 +47,16 @@
 <div id="contact_wrap">
     <div id="contact">
         <div id="contact_message">
-            <p>Cras at ultices erat, sed
-            vulputate eros nunc at
-            augue gravida!</p>
-
-            <p>2345 Setwant natrer, 1234,
-                washington. United States.
-                (401)1234 567
-                hello@mykingdom.com
+            <h2>Welcome to <span>tartar-factory</span></h2>
+            <h3>Create your imagination a reality.</h3>
+            <p class="contact_intro">
+               안녕하세요. 웹/앱 개발 팀 타르타르팩토리 입니다.<br/>
+               <br/>타르타르팩토리는 개인 프리랜서가 모인 팀으로서 타 전문업체보다는 낮은 가격에 완성도 높은 품질을 약속드리겠습니다.<br/>
+               <br/>저희 서비스를 만든다고 생각하고 열정을 갖고 열심히 하겠습니다.
             </p>
         </div>
         <div id="contact_post">
+           <form name="ajaxform" id="ajaxform" action="/emails" method="POST">
             <div id="post_info">
                 <input type="text" id="contact_name" class="contact_text" oninput="nameOnFocus()" >
                 <input type="text" id="contact_email" class="contact_text" oninput="emailOnFocus()">
@@ -65,15 +65,16 @@
                 <textarea id="message_content" aria-multiline="true" oninput="messageOnFoucs()"></textarea>
             </div>
             <div id="post_message">
-                <img src="../images/contact/send.png" onclick="sendMessage()">
+                <input type="image" src="../images/contact/send.png">
             </div>
+           </form>
         </div>
     </div>
 </div>
 <div id="footer">
     Copyright ⓒ <b>TARTAR-FACTORY</b> All right reserved.<br/>
     <p>
-        TEL. 010-6385-5016 EMAIL. tartar@factory.com
+        TEL. 010-6385-5016 EMAIL. mss@tartarfactory.com
     </p>
 </div>
 </body>
@@ -81,40 +82,54 @@
 
 <script>
 
-    function sendMessage() {
-        $.ajax({
-            type: "POST",
-            dataType: "json",
-            data: {
-                "name":$("#contact_name").val(),
-                "email":$("#contact_email").val(),
-                "content":$("#message_content").val()
-            },
-            url: "http://localhost:8000/emails",
-            success: function (data) {
-                alert('메일이 성공적으로 발송되었습니다.');
-            }
-        })
-    }
+   $("#ajaxform").submit(function(e)
+   {
+      //URL, Data
+      var formURL = __TARTAR_HOST__ + $(this).attr("action");
+      var postData = {
+         "name":$("#contact_name").val(),
+         "email":$("#contact_email").val(),
+         "content":$("#message_content").val()
+      };
 
-    function nameOnFocus() {
-        var textBox = document.getElementById("contact_name");
-        textBox.style.background = "none";
-        if(textBox.value == '')
-            textBox.style.background = "url(../images/contact/name.png) no-repeat";
-    }
+      //Send data
+      $.ajax({
+         type: "POST",
+         dataType: "json",
+         data: postData,
+         url: formURL,
+         success: function (data) {
+            alert('메일이 성공적으로 발송되었습니다.');
+         },
+         error: function(jqXHR, textStatus, errorThrown)
+         {
+            alert(errorThrown);
+         }
+      });
 
-    function emailOnFocus() {
-        var textBox = document.getElementById("contact_email");
-        textBox.style.background = "none";
-        if(textBox.value == '')
-            textBox.style.background = "url(../images/contact/email.png) no-repeat";
-    }
+      //STOP default action
+      e.preventDefault();
+   });
 
-    function messageOnFoucs() {
-        var textBox = document.getElementById("message_content");
-        textBox.style.background = "none";
-        if(textBox.value == '')
-            textBox.style.background = "url(../images/contact/message.png) no-repeat";
-    }
+   function nameOnFocus() {
+      var textBox = document.getElementById("contact_name");
+      textBox.style.background = "none";
+      if(textBox.value == '')
+         textBox.style.background = "url(../images/contact/name.png) no-repeat";
+   }
+
+   function emailOnFocus() {
+      var textBox = document.getElementById("contact_email");
+      textBox.style.background = "none";
+      if(textBox.value == '')
+         textBox.style.background = "url(../images/contact/email.png) no-repeat";
+   }
+
+   function messageOnFoucs() {
+      var textBox = document.getElementById("message_content");
+      textBox.style.background = "none";
+      if(textBox.value == '')
+         textBox.style.background = "url(../images/contact/message.png) no-repeat";
+   }
+
 </script>
