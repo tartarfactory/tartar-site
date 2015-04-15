@@ -61,7 +61,7 @@
             </tr>
             <tr>
                <th>이름</th>
-               <td><input type="text" id="name" name="name"/></td>
+               <td><input type="text" id="name" name="name" disabled/></td>
                <th>비밀번호</th>
                <td><input type="password" id="password" name="password"/></td>
             </tr>
@@ -143,18 +143,24 @@
          var postData = {
             "subject":$("#subject").val(),
             "content":$("#content").val(),
-            "name":$("#name").val()
+            "name":$("#name").val(),
+            "password":$("#password").val()
          };
-         alert(formURL);
          //Send data
          $.ajax({
             type: "PUT",
             dataType: "json",
             data: postData,
-            url: formURL,
+            url: formURL+'/'+getParams()['id'],
             success: function (data) {
-               alert('수정되었습니다.');
-               boardListBtn();
+               if(data == false) {
+                  alert('비밀번호를 확인해 주세요.');
+               }
+               else {
+                  alert('수정되었습니다.');
+                  boardListBtn();
+               }
+
             },
             error: function(jqXHR, textStatus, errorThrown)
             {
