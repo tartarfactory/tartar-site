@@ -20,7 +20,6 @@ function frmChkValue(frm){
         break;
         case "boardWriteFrm" :
             if(!chkInput(frm.subject, "제목을 입력해주세요 ~ ")) return false;
-            if(!chkInput(frm.content, "내용을 입력해주세요 ~")) return false;
             if(!chkInput(frm.name, "이름을 입력 해주세요 ~ ")) return false;
             if(!chkInput(frm.password, "비밀번호를 입력 해주세요 ~ ")) return false;
         break;
